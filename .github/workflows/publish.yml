@@ -1,0 +1,64 @@
+name: Publish Showdown Lounge
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/publish.yml
+  workflow_dispatch:
+  repository_dispatch:
+    types: [publish-lounge]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-lounge
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout this user site
+        uses: actions/checkout@v4
+        with:
+          path: site
+      - name: Checkout lounge source
+        uses: actions/checkout@v4
+        with:
+          repository: Burnsted/showdown-lounge
+          path: lounge
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Static export
+        working-directory: lounge
+        run: |
+          npm install --no-fund --no-audit
+          rm -rf src/app/api
+          STATIC_EXPORT=1 PAGES_BASE_PATH=/showdown-lounge npm run build
+          touch out/.nojekyll
+      - name: Commit published site
+        working-directory: site
+        run: |
+          rm -rf showdown-lounge
+          mkdir -p showdown-lounge
+          cp -a ../lounge/out/. showdown-lounge/
+          touch .nojekyll showdown-lounge/.nojekyll
+          cat > index.html <<'HTML'
+          <!doctype html>
+          <meta charset="utf-8">
+          <meta http-equiv="refresh" content="0;url=/showdown-lounge/">
+          <title>Showdown Lounge</title>
+          <a href="/showdown-lounge/">Open Showdown Lounge</a>
+          HTML
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          if git diff --cached --quiet; then
+            echo "No site changes"
+          else
+            git commit -m "Publish Showdown Lounge static site"
+            git push
+          fi

@@ -29,7 +29,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Burnsted/stomp-preview
-          ref: 332321c1cbe797a56281ede0836f84fe0f18985b
+          ref: 90041f3f9a73681c07cabd3c9505c068245bf85c
           path: src
 
       - name: Setup Node
@@ -50,28 +50,31 @@ jobs:
 
       - name: Stamp deployed SHA + README meta
         run: |
-          printf '%s\n' '332321c1cbe797a56281ede0836f84fe0f18985b' > src/site-pages/DEPLOYED_SHA.txt
+          printf '%s\n' '90041f3f9a73681c07cabd3c9505c068245bf85c' > src/site-pages/DEPLOYED_SHA.txt
           cat > src/site-pages/README.md << 'README'
           # TEMPORARY Family Playtest Preview — SIMULATED · not production
 
           Isolated fictional-data family playtest for Cameron / Justin / Ted.
 
           - Live URL: https://burnsted.github.io/stomp-family-playtest/
-          - Deployed SHA: see DEPLOYED_SHA.txt
+          - Deployed SHA: see DEPLOYED_SHA.txt (Form #7 brand lock)
           - Production arcade (untouched): https://burnsted.github.io/stomp-preview/
           README
           python3 - <<'PY'
           from pathlib import Path
-          sha = "332321c1cbe797a56281ede0836f84fe0f18985b"
+          sha = "90041f3f9a73681c07cabd3c9505c068245bf85c"
           meta = (
               f'<meta name="stomp-family-playtest-sha" content="{sha}"/>'
-              f'<meta name="stomp-deploy-label" content="FAMILY PLAYTEST · SIMULATED · sha 332321c"/>'
+              f'<meta name="stomp-deploy-label" content="FAMILY PLAYTEST · SIMULATED · Form7 · sha 90041f3"/>'
           )
           for name in ("index.html", "404.html"):
               p = Path("src/site-pages") / name
               text = p.read_text(encoding="utf-8").replace("\x00", "")
-              if "stomp-family-playtest-sha" not in text:
-                  text = text.replace("<head>", "<head>" + meta, 1)
+              # always refresh stamp
+              import re
+              text = re.sub(r'<meta name="stomp-family-playtest-sha"[^>]*>', '', text)
+              text = re.sub(r'<meta name="stomp-deploy-label"[^>]*>', '', text)
+              text = text.replace("<head>", "<head>" + meta, 1)
               p.write_text(text, encoding="utf-8")
           PY
 
@@ -89,6 +92,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No playtest site changes"
           else
-            git commit -m "Publish temporary family playtest @ 332321c1cbe797a56281ede0836f84fe0f18985b"
+            git commit -m "Publish temporary family playtest Form #7 @ 90041f3f9a73681c07cabd3c9505c068245bf85c"
             git push
           fi

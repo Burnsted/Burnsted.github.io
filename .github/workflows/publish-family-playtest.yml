@@ -1,0 +1,94 @@
+name: Publish Family Playtest
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - .github/workflows/publish-family-playtest.yml
+  workflow_dispatch:
+  repository_dispatch:
+    types: [publish-family-playtest]
+
+permissions:
+  contents: write
+
+concurrency:
+  group: publish-family-playtest
+  cancel-in-progress: true
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout this user site
+        uses: actions/checkout@v4
+        with:
+          path: site
+
+      - name: Checkout pinned playtest source
+        uses: actions/checkout@v4
+        with:
+          repository: Burnsted/stomp-preview
+          ref: 332321c1cbe797a56281ede0836f84fe0f18985b
+          path: src
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: src/gb-phone/package-lock.json
+
+      - name: Install + build Pages static site
+        working-directory: src/gb-phone
+        env:
+          GITHUB_PAGES: "1"
+          GITHUB_PAGES_BASE: /stomp-family-playtest/
+        run: |
+          npm ci
+          npm run build:pages
+
+      - name: Stamp deployed SHA + README meta
+        run: |
+          printf '%s\n' '332321c1cbe797a56281ede0836f84fe0f18985b' > src/site-pages/DEPLOYED_SHA.txt
+          cat > src/site-pages/README.md << 'README'
+          # TEMPORARY Family Playtest Preview — SIMULATED · not production
+
+          Isolated fictional-data family playtest for Cameron / Justin / Ted.
+
+          - Live URL: https://burnsted.github.io/stomp-family-playtest/
+          - Deployed SHA: see DEPLOYED_SHA.txt
+          - Production arcade (untouched): https://burnsted.github.io/stomp-preview/
+          README
+          python3 - <<'PY'
+          from pathlib import Path
+          sha = "332321c1cbe797a56281ede0836f84fe0f18985b"
+          meta = (
+              f'<meta name="stomp-family-playtest-sha" content="{sha}"/>'
+              f'<meta name="stomp-deploy-label" content="FAMILY PLAYTEST · SIMULATED · sha 332321c"/>'
+          )
+          for name in ("index.html", "404.html"):
+              p = Path("src/site-pages") / name
+              text = p.read_text(encoding="utf-8").replace("\x00", "")
+              if "stomp-family-playtest-sha" not in text:
+                  text = text.replace("<head>", "<head>" + meta, 1)
+              p.write_text(text, encoding="utf-8")
+          PY
+
+      - name: Commit published playtest site
+        working-directory: site
+        run: |
+          set -euo pipefail
+          rm -rf stomp-family-playtest
+          mkdir -p stomp-family-playtest
+          cp -a ../src/site-pages/. stomp-family-playtest/
+          touch .nojekyll stomp-family-playtest/.nojekyll
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A stomp-family-playtest .nojekyll
+          if git diff --cached --quiet; then
+            echo "No playtest site changes"
+          else
+            git commit -m "Publish temporary family playtest @ 332321c1cbe797a56281ede0836f84fe0f18985b"
+            git push
+          fi

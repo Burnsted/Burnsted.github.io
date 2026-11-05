@@ -29,7 +29,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: Burnsted/stomp-preview
-          ref: a038ff9148ab607999d413f5a1d6e739d48c10e1
+          ref: 460a3427337c30d9b1dd6e3fc916606fdfbc1065
           path: src
 
       - name: Setup Node
@@ -51,22 +51,23 @@ jobs:
 
       - name: Stamp deployed SHA + README meta
         run: |
-          printf '%s\n' 'a038ff9148ab607999d413f5a1d6e739d48c10e1' > src/site-pages/DEPLOYED_SHA.txt
+          printf '%s\n' '460a3427337c30d9b1dd6e3fc916606fdfbc1065' > src/site-pages/DEPLOYED_SHA.txt
           cat > src/site-pages/README.md << 'README'
           # TEMPORARY Family Playtest Preview — SIMULATED · not production
 
           Isolated fictional-data family playtest for Cameron / Justin / Ted.
 
           - Live URL: https://burnsted.github.io/stomp-family-playtest/
-          - Deployed SHA: see DEPLOYED_SHA.txt (Form #7 OG + icons + og:image)
+          - Deployed SHA: see DEPLOYED_SHA.txt (Create Your STOMPER journey · Form #7)
+          - Source draft PR: https://github.com/Burnsted/stomp-preview/pull/56 (keep draft / do not merge)
           - Production arcade (untouched): https://burnsted.github.io/stomp-preview/
           README
           python3 - <<'PY'
           from pathlib import Path
-          sha = "a038ff9148ab607999d413f5a1d6e739d48c10e1"
+          sha = "460a3427337c30d9b1dd6e3fc916606fdfbc1065"
           meta = (
               f'<meta name="stomp-family-playtest-sha" content="{sha}"/>'
-              f'<meta name="stomp-deploy-label" content="FAMILY PLAYTEST · SIMULATED · Form7 OG · sha a038ff9"/>'
+              f'<meta name="stomp-deploy-label" content="FAMILY PLAYTEST · SIMULATED · Create STOMPER · sha 460a342"/>'
           )
           for name in ("index.html", "404.html"):
               p = Path("src/site-pages") / name
@@ -92,6 +93,6 @@ jobs:
           if git diff --cached --quiet; then
             echo "No playtest site changes"
           else
-            git commit -m "Publish temporary family playtest Form #7 OG @ a038ff9148ab607999d413f5a1d6e739d48c10e1"
+            git commit -m "Publish temporary family playtest Create Your STOMPER @ 460a3427337c30d9b1dd6e3fc916606fdfbc1065"
             git push
           fi

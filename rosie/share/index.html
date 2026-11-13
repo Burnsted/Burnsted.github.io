@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Your Rosie sharing kit — show the QR, copy the link, or print stickers.">
+  <meta name="robots" content="noindex">
+  <title>Your Rosie sharing kit</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <main class="wrap">
+    <header class="hero">
+      <h1>Your Rosie sharing kit</h1>
+      <p class="lede">Show a friend this QR code, or send them the link below.</p>
+    </header>
+
+    <section class="block" aria-labelledby="qr-heading">
+      <h2 id="qr-heading" class="visually-hidden">QR code for friends</h2>
+      <figure class="qr-figure">
+        <img
+          class="qr"
+          src="../qr.png"
+          width="512"
+          height="512"
+          alt="QR code. A friend can scan this with their phone camera to open Meet Rosie."
+        >
+        <figcaption>Meet Rosie — scan to listen</figcaption>
+      </figure>
+    </section>
+
+    <section class="block" aria-labelledby="link-heading">
+      <h2 id="link-heading">Friend link</h2>
+      <p class="friend-link" id="friend-link">https://burnsted.github.io/rosie/</p>
+      <div class="btn-row">
+        <button type="button" class="btn btn-primary" id="btn-copy-link">Copy link</button>
+        <button type="button" class="btn btn-secondary" id="btn-share" hidden>Share</button>
+      </div>
+      <p class="status" id="link-status" aria-live="polite"></p>
+    </section>
+
+    <section class="block" aria-labelledby="message-heading">
+      <h2 id="message-heading">Ready-to-send message</h2>
+      <label class="visually-hidden" for="share-message">Message text</label>
+      <textarea id="share-message" class="message-box" readonly rows="5"></textarea>
+      <button type="button" class="btn btn-primary btn-full" id="btn-copy-message">Copy message</button>
+      <p class="status" id="message-status" aria-live="polite"></p>
+    </section>
+
+    <section class="block" aria-labelledby="print-heading">
+      <h2 id="print-heading">Print at home</h2>
+      <p class="note">Print at Actual size / 100%.</p>
+      <div class="stack">
+        <a class="btn btn-secondary btn-full" href="../card.html">Printable card (HTML)</a>
+        <a class="btn btn-secondary btn-full" href="../card.png" download="rosie-card.png">Printable card (image)</a>
+        <a class="btn btn-secondary btn-full" href="../stickers/sheet-avery-22807-2in-round.pdf">Phone sticker, 2-inch round, Avery 22807</a>
+        <a class="btn btn-secondary btn-full" href="../stickers/sheet-avery-5655-3in-round.pdf">Folder sticker, 3-inch round, Avery 5655</a>
+        <a class="btn btn-secondary btn-full" href="../stickers/sheet-avery-94237-3x2-rect.pdf">Folder label, 3 by 2 inch, Avery 94237</a>
+      </div>
+    </section>
+
+    <section class="block" aria-labelledby="save-heading">
+      <h2 id="save-heading">Save sticker images</h2>
+      <div class="stack">
+        <a class="btn btn-secondary btn-full" href="../stickers/sticker-2in-round.png" download="rosie-sticker-2in-round.png">Save 2-inch round sticker</a>
+        <a class="btn btn-secondary btn-full" href="../stickers/sticker-3in-round.png" download="rosie-sticker-3in-round.png">Save 3-inch round sticker</a>
+        <a class="btn btn-secondary btn-full" href="../stickers/sticker-3x2-rect.png" download="rosie-sticker-3x2-rect.png">Save 3 by 2 inch label</a>
+      </div>
+    </section>
+  </main>
+
+  <script src="./app.js"></script>
+</body>
+</html>

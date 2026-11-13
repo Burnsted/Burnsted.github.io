@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Meet Rosie — a patient companion you talk to out loud.">
+  <meta name="robots" content="index,follow">
+  <title>Meet Rosie</title>
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <div class="wrap">
+    <header class="player-bar" id="top">
+      <p class="kicker">A voice companion</p>
+      <h1 class="brand">Meet Rosie</h1>
+      <p class="lede">Listen at your own pace. You can pause anytime and come back later.</p>
+
+      <div class="controls" role="group" aria-label="Audio controls">
+        <button type="button" class="btn btn-primary" id="btn-play" aria-pressed="false">Listen</button>
+        <button type="button" class="btn btn-secondary" id="btn-pause" disabled>Pause</button>
+        <button type="button" class="btn btn-secondary" id="btn-back">Back 15 seconds</button>
+        <button type="button" class="btn btn-secondary" id="btn-restart">Start over</button>
+      </div>
+      <p class="status" id="status" aria-live="polite">Ready when you are.</p>
+      <div class="progress" aria-hidden="true"><span id="progress-bar"></span></div>
+    </header>
+
+    <main id="main">
+      <section class="panel" id="intro" data-section="intro">
+        <p class="kicker">Start here</p>
+        <h2>A calm walk-through</h2>
+        <p>This page explains what Rosie is, who helps behind her, how your privacy is handled, what you need, and how to begin.</p>
+        <p>Use the big buttons above to play, pause, go back fifteen seconds, or start over. Or tap Listen on any section below to hear just that part.</p>
+        <button type="button" class="btn btn-listen" data-play-section="intro">Listen to this section</button>
+      </section>
+
+      <section class="panel" id="meet" data-section="meet">
+        <p class="kicker">Section 1</p>
+        <h2>Meet Rosie</h2>
+        <p>Rosie is a companion you talk to out loud — like a patient friend who remembers you.</p>
+        <p>She is different from ChatGPT in a few ways. She remembers your people, your pill schedule, your lists, and what you like, from one day to the next.</p>
+        <p>She has quiet helpers behind her for specific jobs. She can check suspicious calls, emails, and texts for scams. She can keep reminders. And if you say yes, she can use your email and calendar.</p>
+        <p>She goes one step at a time, and she waits for you.</p>
+        <button type="button" class="btn btn-listen" data-play-section="meet">Listen to this section</button>
+      </section>
+
+      <section class="panel" id="who" data-section="who">
+        <p class="kicker">Section 2</p>
+        <h2>Who helps</h2>
+        <p><strong>Rosie</strong> is the everyday voice you talk with.</p>
+        <p><strong>Aunt Patience</strong> is her second voice — a calm Southern auntie for sticky problems: scam checks, phone and app setup, billing disputes, paperwork follow-through, and car questions with her quiet car expert, Miss Daisy.</p>
+        <ul class="helper-list">
+          <li><strong>Alfred</strong> Home, meals, groceries, and outings.</li>
+          <li><strong>Dolly</strong> Bills, budgets, spreadsheets, and getting tax papers organized for your preparer.</li>
+          <li><strong>Doc</strong> Health notes, pill lists, refills, and questions for your doctor. She never replaces your doctor. In an emergency, she says call 911.</li>
+          <li><strong>Joy</strong> Music, games, trivia, “Did You Know?” stories, and help with TV and movies.</li>
+          <li><strong>Keepsake</strong> Life stories, family, photos, and letters.</li>
+        </ul>
+        <button type="button" class="btn btn-listen" data-play-section="who">Listen to this section</button>
+      </section>
+
+      <section class="panel" id="privacy" data-section="privacy">
+        <p class="kicker">Section 3</p>
+        <h2>Your privacy</h2>
+        <p>Rosie never asks for passwords, PINs, or full account numbers.</p>
+        <p>She never moves money.</p>
+        <p>And she always reads back what she plans to do, then waits for your yes, before sending or scheduling anything.</p>
+        <button type="button" class="btn btn-listen" data-play-section="privacy">Listen to this section</button>
+      </section>
+
+      <section class="panel" id="need" data-section="need">
+        <p class="kicker">Section 4</p>
+        <h2>What you need</h2>
+        <p>You need a paid plan that includes Grok Bot. The Premium plan is $30 a month and includes Grok Bot. Higher plans include it too.</p>
+        <p>You also need the Grok Bot app. It runs on iPhone, iPad, Android phones, Mac, Windows, and Linux computers.</p>
+        <p>On a phone or tablet, get it from the App Store or Google Play. On a computer, download it from x.ai/bot.</p>
+        <button type="button" class="btn btn-listen" data-play-section="need">Listen to this section</button>
+      </section>
+
+      <section class="panel" id="start" data-section="start">
+        <p class="kicker">Section 5</p>
+        <h2>Getting started</h2>
+        <ol class="steps">
+          <li><span class="num" aria-hidden="true">1</span><span>Choose the Premium plan — or another plan that includes Grok Bot.</span></li>
+          <li><span class="num" aria-hidden="true">2</span><span>Download the Grok Bot app and sign in.</span></li>
+          <li><span class="num" aria-hidden="true">3</span><span>Open the Rosie link your friend shares. Use the button below when it is ready.</span></li>
+          <li><span class="num" aria-hidden="true">4</span><span>Add Rosie as a new bot.</span></li>
+          <li><span class="num" aria-hidden="true">5</span><span>Tap the voice button and say hello.</span></li>
+          <li><span class="num" aria-hidden="true">6</span><span>Rosie asks a few easy questions, one at a time, to get to know you. You can skip any, or stop anytime.</span></li>
+        </ol>
+        <button type="button" class="btn btn-listen" data-play-section="start">Listen to this section</button>
+      </section>
+
+      <section class="panel" id="open" data-section="open">
+        <p class="kicker">Next step</p>
+        <h2>Open Rosie</h2>
+        <div class="cta-box" id="rosie-cta">
+          <p class="cta-note">Ask your friend to text you the Rosie link.</p>
+        </div>
+        <p class="closing" id="closing-line">When you’re ready, say “Hi Rosie, let’s get started,” and she’ll take it from there.</p>
+        <button type="button" class="btn btn-listen" data-play-section="open">Listen to this section</button>
+      </section>
+
+      <section class="panel" id="qr" data-section="qr">
+        <p class="kicker">Share</p>
+        <h2>Scan to listen</h2>
+        <div class="qr-block">
+          <img src="./qr.png" width="512" height="512" alt="QR code that opens the Meet Rosie page">
+          <p class="qr-caption">Meet Rosie — scan to listen</p>
+        </div>
+      </section>
+    </main>
+
+    <p class="footer-note">No trackers. Works on your phone. Pause anytime.</p>
+  </div>
+
+  <script src="./config.js"></script>
+  <script src="./app.js"></script>
+</body>
+</html>

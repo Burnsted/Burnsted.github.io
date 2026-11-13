@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Meet Rosie — printable card</title>
+  <style>
+    @page {
+      size: letter;
+      margin: 0.6in;
+    }
+
+    :root {
+      --ink: #1a2430;
+      --ink-soft: #2c3a4a;
+      --accent: #145049;
+    }
+
+    * { box-sizing: border-box; }
+
+    html, body {
+      margin: 0;
+      padding: 0;
+      background: #fff;
+      color: var(--ink);
+      font-family: Georgia, "Times New Roman", Times, serif;
+    }
+
+    .sheet {
+      width: 8.5in;
+      min-height: 11in;
+      margin: 0 auto;
+      padding: 0.85in 0.9in;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      background:
+        radial-gradient(900px 500px at 50% 0%, #e7f1ec 0%, transparent 60%),
+        linear-gradient(180deg, #edf4f1 0%, #f7faf8 55%, #ffffff 100%);
+    }
+
+    h1 {
+      margin: 0 0 0.35in;
+      font-size: 54pt;
+      line-height: 1.05;
+      letter-spacing: -0.02em;
+      font-weight: 700;
+    }
+
+    .line {
+      margin: 0 0 0.55in;
+      max-width: 5.8in;
+      font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 16pt;
+      line-height: 1.35;
+      color: var(--ink-soft);
+    }
+
+    .qr {
+      width: 3.6in;
+      height: 3.6in;
+      padding: 0.18in;
+      background: #fff;
+      border: 1px solid rgba(26, 36, 48, 0.16);
+      border-radius: 0.18in;
+    }
+
+    .caption {
+      margin-top: 0.35in;
+      font-family: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      font-size: 14pt;
+      color: var(--accent);
+      font-weight: 600;
+    }
+
+    @media screen {
+      body {
+        background: #dfe6e2;
+        padding: 24px;
+      }
+      .sheet {
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+      }
+    }
+  </style>
+</head>
+<body>
+  <main class="sheet">
+    <h1>Meet Rosie</h1>
+    <p class="line">A patient helper you talk to — scan with your phone camera to listen</p>
+    <img class="qr" src="./qr.png" width="512" height="512" alt="QR code linking to the Meet Rosie page">
+    <p class="caption">Meet Rosie — scan to listen</p>
+  </main>
+</body>
+</html>

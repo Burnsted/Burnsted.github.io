@@ -1,0 +1,351 @@
+:root {
+  --ink: #1a2430;
+  --ink-soft: #2c3a4a;
+  --paper: #f3f7f4;
+  --paper-2: #e7f0ea;
+  --sky: #d7e8ef;
+  --accent: #1f6b63;
+  --accent-dark: #145049;
+  --accent-soft: #d9efe9;
+  --line: rgba(26, 36, 48, 0.14);
+  --shadow: 0 10px 28px rgba(26, 36, 48, 0.12);
+  --radius: 18px;
+  --font-display: Georgia, "Times New Roman", Times, serif;
+  --font-body: "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  --tap: 60px;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
+}
+
+body {
+  margin: 0;
+  color: var(--ink);
+  font-family: var(--font-body);
+  font-size: 22px;
+  line-height: 1.45;
+  background:
+    radial-gradient(1200px 700px at 10% -10%, #ffffff 0%, transparent 55%),
+    radial-gradient(900px 600px at 100% 0%, #cfe3db 0%, transparent 50%),
+    linear-gradient(180deg, var(--sky) 0%, var(--paper) 38%, var(--paper-2) 100%);
+  min-height: 100%;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+a {
+  color: var(--accent-dark);
+}
+
+.skip {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+}
+
+.skip:focus {
+  left: 12px;
+  top: 12px;
+  z-index: 100;
+  background: #fff;
+  padding: 12px 16px;
+  border-radius: 10px;
+}
+
+.wrap {
+  width: min(720px, 100%);
+  margin: 0 auto;
+  padding: 0 18px 48px;
+}
+
+.player-bar {
+  position: sticky;
+  top: 0;
+  z-index: 40;
+  margin: 0 -18px;
+  padding: 14px 18px 16px;
+  background: rgba(243, 247, 244, 0.94);
+  backdrop-filter: blur(10px);
+  border-bottom: 1px solid var(--line);
+  box-shadow: 0 8px 20px rgba(26, 36, 48, 0.06);
+}
+
+.brand {
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 8vw, 3rem);
+  line-height: 1.1;
+  margin: 4px 0 6px;
+  letter-spacing: -0.02em;
+}
+
+.lede {
+  margin: 0 0 14px;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+}
+
+.controls {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.btn {
+  appearance: none;
+  border: 2px solid transparent;
+  border-radius: 14px;
+  min-height: var(--tap);
+  padding: 12px 16px;
+  font: inherit;
+  font-size: 1.05rem;
+  font-weight: 650;
+  cursor: pointer;
+  text-align: center;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: transform 0.15s ease, background 0.15s ease, border-color 0.15s ease;
+}
+
+.btn:active {
+  transform: scale(0.98);
+}
+
+.btn:focus-visible {
+  outline: 3px solid #0b7a6d;
+  outline-offset: 3px;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+  box-shadow: var(--shadow);
+}
+
+.btn-primary:hover {
+  background: var(--accent-dark);
+}
+
+.btn-secondary {
+  background: #fff;
+  color: var(--ink);
+  border-color: var(--line);
+}
+
+.btn-secondary:hover {
+  border-color: var(--accent);
+}
+
+.btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-listen {
+  background: var(--accent-soft);
+  color: var(--accent-dark);
+  border-color: rgba(31, 107, 99, 0.25);
+  width: 100%;
+  margin-top: 18px;
+}
+
+.btn-large {
+  min-height: 72px;
+  font-size: 1.25rem;
+  width: 100%;
+}
+
+.status {
+  margin: 12px 0 0;
+  min-height: 1.4em;
+  font-size: 1rem;
+  color: var(--ink-soft);
+}
+
+.progress {
+  margin-top: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: rgba(26, 36, 48, 0.1);
+  overflow: hidden;
+}
+
+.progress > span {
+  display: block;
+  height: 100%;
+  width: 0%;
+  background: linear-gradient(90deg, #2a8f84, #1f6b63);
+  transition: width 0.2s linear;
+}
+
+section.panel {
+  scroll-snap-align: start;
+  min-height: calc(100dvh - 24px);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 28px 0 36px;
+  border-bottom: 1px solid var(--line);
+}
+
+section.panel:last-of-type {
+  border-bottom: 0;
+}
+
+.kicker {
+  display: inline-block;
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--accent-dark);
+  font-weight: 700;
+}
+
+h2 {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 7vw, 2.5rem);
+  line-height: 1.15;
+  margin: 0 0 16px;
+}
+
+.panel p {
+  margin: 0 0 14px;
+  max-width: 34ch;
+}
+
+.panel p:last-child {
+  margin-bottom: 0;
+}
+
+.steps {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 12px;
+}
+
+.steps li {
+  display: grid;
+  grid-template-columns: 48px 1fr;
+  gap: 12px;
+  align-items: start;
+  background: rgba(255, 255, 255, 0.55);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  padding: 14px;
+}
+
+.steps .num {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: grid;
+  place-items: center;
+  background: var(--accent);
+  color: #fff;
+  font-weight: 700;
+  font-size: 1.2rem;
+}
+
+.helper-list {
+  display: grid;
+  gap: 14px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.helper-list li {
+  padding: 0;
+}
+
+.helper-list strong {
+  display: block;
+  font-size: 1.15rem;
+  margin-bottom: 4px;
+}
+
+.cta-box {
+  margin-top: 8px;
+  padding: 18px;
+  border-radius: var(--radius);
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid var(--line);
+  text-align: center;
+}
+
+.cta-note {
+  margin: 0;
+  font-size: 1.15rem;
+  color: var(--ink-soft);
+}
+
+.closing {
+  font-family: var(--font-display);
+  font-size: clamp(1.45rem, 5.5vw, 1.9rem);
+  line-height: 1.3;
+  max-width: 22ch;
+}
+
+.qr-block {
+  text-align: center;
+  padding: 18px 0 8px;
+}
+
+.qr-block img {
+  width: min(280px, 70vw);
+  height: auto;
+  background: #fff;
+  padding: 14px;
+  border-radius: 16px;
+  border: 1px solid var(--line);
+}
+
+.qr-caption {
+  margin: 12px 0 0;
+  font-size: 1.05rem;
+  color: var(--ink-soft);
+}
+
+.footer-note {
+  margin: 28px 0 0;
+  font-size: 0.95rem;
+  color: var(--ink-soft);
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .controls {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .panel p {
+    max-width: 48ch;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .btn {
+    transition: none;
+  }
+}
